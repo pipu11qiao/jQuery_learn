@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/2.1.css"/>
+    <script src="js/jquery-1.8.3.js"></script>
+    <script>
+        $(function(){
+         console.log( $("#d2").position());
+         console.log( $("#d2").offset());
+         console.log( $("#text1").scrollTop(300));
+
+        })
+    </script>
+</head>
+<body>
+<h3>有效果：</h3>
+<ul>
+    <li><a href="images/apple_1_bigger.jpg" class="tooltip" title="苹果 iPod"><img src="images/apple_1.jpg" alt="苹果 iPod" /></a></li>
+    <li><a href="images/apple_2_bigger.jpg" class="tooltip" title="苹果 iPod nano"><img src="images/apple_2.jpg" alt="苹果 iPod nano"/></a></li>
+    <li><a href="images/apple_3_bigger.jpg" class="tooltip" title="苹果 iPhone"><img src="images/apple_3.jpg" alt="苹果 iPhone"/></a></li>
+    <li><a href="images/apple_4_bigger.jpg" class="tooltip" title="苹果 Mac"><img src="images/apple_4.jpg" alt="苹果 Mac"/></a></li>
+</ul>
+
+
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
+
+
+<h3>无效果：</h3>
+<ul>
+    <li><a href="images/apple_1_bigger.jpg" title="苹果 iPod"><img src="images/apple_1.jpg" alt="苹果 iPod" /></a></li>
+    <li><a href="images/apple_2_bigger.jpg" title="苹果 iPod nano"><img src="images/apple_2.jpg" alt="苹果 iPod nano"/></a></li>
+    <li><a href="images/apple_3_bigger.jpg" title="苹果 iPhone"><img src="images/apple_3.jpg" alt="苹果 iPhone"/></a></li>
+    <li><a href="images/apple_4_bigger.jpg" title="苹果 Mac"><img src="images/apple_4.jpg" alt="苹果 Mac"/></a></li>
+</ul>
+</body>
+</html>

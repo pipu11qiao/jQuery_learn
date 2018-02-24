@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .btnBox{
+            width: 200px;
+            height: 50px;
+            margin: 50px  auto;
+        }
+        .btnBox>button{
+            display: block;
+            float: left;
+            width: 100px;
+            height: 50px;
+        }
+        .imgBox{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 300px;
+            height: 300px;
+            transform: translate(-50%,-50%);
+        }
+        .itemImg{
+            width: 100%;
+            height: 100%;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="btnBox"><button id="bigBtn">放大</button><button id="smallBtn">缩小</button></div>
+<div class="imgBox">
+    <img src="img/bg-01.jpg" class="itemImg"/>
+</div>
+
+<script src="js/jquery-1.8.3.js"></script>
+<script>
+    var factor = 0.1;
+   function centerZoom(e) {
+       var str = $(this).html();
+       //获得图片的中心点坐标 fakeOrigin
+       var el = $('.imgBox');
+       var thisFactor = 1 + (str === '放大' ? 1 : -1)*factor;
+       el.width(el.width()*thisFactor).height(el.height()*thisFactor);
+   }
+    $('#bigBtn').on('click',centerZoom);
+    $('#smallBtn').on('click',centerZoom);
+</script>
+</body>
+</html>

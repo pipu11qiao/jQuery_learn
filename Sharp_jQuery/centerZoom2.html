@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .btnBox{
+            width: 200px;
+            height: 50px;
+            margin: 50px  auto;
+        }
+        .btnBox>button{
+            display: block;
+            float: left;
+            width: 100px;
+            height: 50px;
+        }
+        .imgBox{
+            position: absolute;
+            left: 800px;
+            top: 200px;
+            width: 300px;
+            height: 300px;
+        }
+        .itemImg{
+            width: 100%;
+            height: 100%;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="btnBox"><button >放大</button><button >缩小</button></div>
+<div class="imgBox">
+    <img src="img/bg-01.jpg" class="itemImg"/>
+</div>
+
+<script src="js/jquery-1.8.3.js"></script>
+<script>
+    var factor = 0.1;
+
+   function centerZoom(el,str) {
+       //获得元素的中心点坐标 fakeOrigin
+       if(el[0].fakeOrigin === undefined) {
+           el[0].fakeOrigin = {
+               top: el.offset().top + el.width() / 2,
+               left: el.offset().left + el.height() / 2
+           }
+       }
+       var fakeOrigin = el[0].fakeOrigin;
+
+
+       console.log(fakeOrigin)
+
+       var thisFactor = 1 + (str === '放大' ? 1 : -1)*factor;
+       //原来的宽 原来的高
+       //现在的宽 现在的高
+
+       var nowWidth = el.width() * thisFactor;
+       var nowHeight = el.height() * thisFactor;
+
+       //现在的left 现在的top
+       var curLeft = fakeOrigin.left - nowHeight/2;
+       var curTop = fakeOrigin.height - nowHeight/2;
+
+       el.width(nowWidth).height(nowHeight).offset({top: curTop,left: curLeft});
+
+   }
+    $('.btnBox>button').on('click',function() {
+        centerZoom($('.imgBox'),$(this).html())
+    });
+</script>
+</body>
+</html>

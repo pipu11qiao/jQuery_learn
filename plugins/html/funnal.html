@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>
+        Title</title>
+    <style>
+        @charset "utf-8";
+        body,div,ul,li,ol,h1,h2,h3,h4,h5,h6,input,textarea,select,p,dl,dt,dd,a,img,button,form,table,th,tr,td,tbody,article,
+        aside, details,figcaption,figure,footer,header, menu,nav,section,span{margin:0; padding:0; border:none;}
+        body{ font-family: "Microsoft YaHei";width:100%;margin:0; background: #fff;}
+        ul,ol{ list-style:none;}
+        a{ color:#666; text-decoration:none;}
+
+        a img{ border:0; }
+        img{vertical-align:top;}
+        i,em{ font-style:normal;}
+        b,strong{ font-weight:normal;}
+        input{outline:none; border:0; background:none;}
+
+        .fl{ float:left;}
+        .fr{ float:right;}
+        .text-left{text-align: left;}
+        .text-right{text-align: right;}
+        .por{ position:relative;}
+
+        .clearfix:after{ display:block; content:''; clear:both;}
+        .clearfix{ zoom:1;}
+
+        /* 网页头部 */
+        #hd {  width: 100%;  padding:0;height: 2.29rem;  line-height: 2.29rem;   background-size: 100% 100%;  }
+        .headerSkin{  background: no-repeat;  }
+
+        .bar{
+            padding:0;
+        }
+        .screen{display: none; position: absolute; width: 100%; top: 2.2rem; z-index: 100;background: #fff;}
+        .screen .tap{ float: left; width: 33%;}
+        .screen .tap p{border-bottom:1px solid transparent;font-size: 0.73rem; color: #000;display: block; width: 100%; height: 2.1rem;line-height: 2.1rem; text-align: center; background: #fff;}
+        .screen .tap p.active{background: #f0f1f5}
+        /*.screen .options{float: left; width: 66%; height: 6.24rem; overflow: scroll;}*/
+        /*.screen .options span{font-size: 0.73rem; border-bottom :1px solid #d9d9d9; float: left; width: 48%; height: 2.1rem;line-height: 2.1rem; background: #f0f1f5; text-align: center;}*/
+
+        .btnBox{ height: 2.1rem; background: #fff; border-top: 1px solid #d9d9d9}
+        .btnBox a{width: 33%;font-size: 0.73rem; height: 2.1rem;color: #38adff; line-height: 2.1rem; text-align: center;}
+        .btnBox a.reset{ float: left;}
+        .btnBox a.confirm{ float: right;}
+
+        .mask{ display:none;position: absolute; top: 2.2rem; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.6); z-index: 10;}
+
+        .fakeSelect {
+            width: 67%;
+            float: left;
+            border-bottom: none;
+            padding: 0;
+            height: 7.24rem;
+            overflow: scroll;
+            display: none;
+        }
+        .fakeSelect.active{
+            display: block;
+        }
+        .fakeOption{ background: #f0f1f5; width:100%;  height:2.1rem;  line-height:2.1rem;  font-size:0.73rem;  color:#111;  border-bottom:1px solid #B6B6B6;  }
+        .fakeOption span{ display: inline-block; width: 85%;overflow: hidden; text-overflow: ellipsis;  white-space: nowrap;}
+        .fakeOption:last-child{  border-bottom:none;  }
+        .fakeOption:after{  content:"";  display: block;  float:right;  width:0.7rem;  margin-top:0.6rem;  height:0.7rem;  border-radius:50%; border:1px solid #39AEFE;  }
+        .fakeOption.selected:after{  background-color:#39AEFE;}
+
+
+        #hd .rightBtn.funnel,.myTime,.myState{display: none;}
+    </style>
+</head>
+<body>
+<button type="button" class="funnelBtn">toggle</button>
+<!--<div class="screen"></div>-->
+<!--<div class="mask"></div>-->
+
+<script src="../js/jquery3.1.1.js"></script>
+<script>
+    // 配置数据格式
+    var config = {
+        el: $('.funnelBtn'),
+        data: [
+            {
+                display: '时间',
+                value: 'time',
+                option: [
+                    {
+                        display: '全部',
+                        value: 'all',
+                        isDefault: true
+                    },
+                    {
+                        display: '上月',
+                        value: 'preMonth'
+                    },
+                    {
+                        display: '本月',
+                        value: 'curMonth'
+                    }
+                ]
+            },
+            {
+                display: '状态',
+                value: 'status',
+                option: [
+                    {
+                        display: '全部',
+                        value: 'curMonth'
+                    },
+                    {
+                        display: '已完成',
+                        value: 'finished',
+                        isDefault: true
+                    },
+                    {
+                        display: '未完成',
+                        value: 'unfinished'
+                    }
+                ]
+            }
+
+        ],
+        onSelect: function(obj) {
+            console.log(obj);
+        }
+    };
+
+    //筛选导航的切换
+    var Funnel = function(option) {
+        this.$model = null;//外层元素
+        this.$el = null;
+        this.$mask = null;
+        this.option = null;
+        this.init(option.el,option.data);
+        if(option.onSelect) {
+            this.onSelect = option.onSelect;
+        }
+    };
+    Funnel.prototype = {
+        constructor: Funnel,
+        init: function(el,option) {
+            this.$el = $(el);
+             $(document.body).append('<div class="screen"></div><div class="mask"></div>');
+
+            this.$model = $('.screen');
+            this.$mask = $('.mask');
+            this.option = option;
+            this.setHtml();
+            this.bind();
+        },
+        onSelect: function(obj) {
+            console.log(obj);
+        },
+        setHtml: function() {
+            var i,len,obj,subI,subLen,subObj,tapStr,ulStr,btnStr;
+            tapStr = '<div class="tap">';
+            ulStr = '';
+            btnStr = '<div class="btnBox"> <a class="reset">重置</a> <a class="confirm">确定</a> </div>';
+            for(i = 0,len = this.option.length; i < len; i += 1) {
+                obj = this.option[i];
+                tapStr += '<p ' +
+                    (i === 0 ? 'class="active  default"' : '') +
+                    ' data-value="'+obj.value+'">' + obj.display + '</p>';
+                ulStr += '<ul class="fakeSelect ' + (i === 0 ? 'active' : '') +'">';
+                for(subI = 0,subLen = obj.option.length; subI < subLen; subI += 1) {
+                    subObj = obj.option[subI];
+                    ulStr += '<li class="fakeOption ' +
+                        (subObj.isDefault ? 'selected default': '') +
+                        '" data-value="' + subObj.value + '">' + subObj.display + '</li>';
+                }
+                ulStr += '</ul>'
+            }
+            tapStr += '</div>';
+            this.$model.html(tapStr + ulStr + btnStr);
+
+        },
+        itemClick: function(e) {
+            // 主栏点击的事件函数
+            e.stopPropagation();
+            $this = $(this);
+            var index = $this.index();
+            $this.addClass('active').siblings().removeClass('active');
+            $this.parent().siblings('ul').eq(index).show().siblings('ul').hide();
+        },
+        subItemCick: function (e) {
+            e.stopPropagation();
+            $(this).addClass('selected').siblings().removeClass('selected');
+        },
+        resetClick: function () {
+            $(this).addClass('selected').siblings().removeClass('selected');
+        },
+        open: function() {
+            me.$model.show();
+            me.$mask.show();
+        },
+        close: function() {
+            this.$model.hide();
+            this.$mask.hide();
+        },
+        getData: function() {
+            var obj = {};
+            var item = this.$model.find('.tap p');
+            var subItem = this.$model.find('.fakeOption.selected');
+            item.each(function(index) {
+                obj[$(this).data('value')] = subItem.eq(index).data('value');
+            });
+            return obj;
+
+        },
+        bind: function() {
+            var me = this;
+            // 切换显示事件
+            me.$el.on('click',function(e) {
+                e.stopPropagation();
+                me.$mask.toggle();
+                me.$model.toggle();
+                me.$model.find('.tap .default').trigger('click');
+            });
+            //主栏切换
+            me.$model.on('click','.tap p',me.itemClick);
+            // 子栏切换
+            me.$model.on('click','.fakeSelect li',me.subItemCick);
+            // 重置
+            me.$model.on('click','.reset',function() {
+                me.$model.find('.default').trigger('click');
+            });
+            // 确认
+            me.$model.on('click','.confirm',function(e) {
+                e.stopPropagation();
+                me.close();
+                me.onSelect(me.getData());
+            });
+            me.$model.on('click',function(e) {
+                e.stopPropagation();
+            })
+            me.$mask.on('click',function() {
+                me.close();
+            });
+            $(document).on('click',function() {
+                me.close();
+            })
+        }
+    };
+    var funnel = new Funnel(config);
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/jquery.monthpicker.css"/>
+    <link rel="stylesheet" href="../css/m_monthpicker.css"/>
+    <title></title>
+</head>
+<body>
+<button id="btn1">gogo</button>
+<button id="btn2">gogo</button>
+<input type="text" id="btn3" />
+<input type="text" id="btn4" />
+
+<script src="../js/jquery-1.8.3.js"></script>
+<script src="../js/m_monthpicker.js"></script>
+<!--<script src="../js/jquery.monthpicker.js"></script>-->
+<script>
+    var vm = {};
+
+//    $('#btn1,#btn2,#btn3').monthPicker('201109');
+//    $('#btn1,#btn2,#btn3').monthPicker(function(year,month) {
+//        console.log(year,month);
+//        vm.value = year;
+//        console.log(vm.value);
+//    });
+    $('#btn1,#btn2').monthPicker({
+        str: '201603',
+        offLeft: -20,
+        offTop: 20,
+        printEl: $('#btn4'),
+        onSelect: function(year,month) {
+            vm.value = year;
+            console.log(vm.value);
+        }
+    });
+    $('#btn3').monthPicker({
+        str: '201603',
+        offLeft: 100,
+        offTop: 20,
+        onSelect: function(year,month) {
+            vm.value = year;
+            console.log(vm.value);
+        }
+    });
+</script>
+</body>
+</html>

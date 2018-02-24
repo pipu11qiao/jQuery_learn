@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>
+        Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+        }
+        body{
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+        div{
+            width: 100%;
+            height: 4rem;
+            border-bottom: 2px solid #000000;
+        }
+    </style>
+</head>
+<body>
+
+<script src="../js/jquery3.1.1.js"></script>
+<script src="../js/serverData.js"></script>
+<script>
+    var initStr = '';
+    serverData.slice(0,10).map(function(elem) {
+        initStr += '<div><p>'+elem.nameString+'</p><p>'+elem.curDateTime+'</p></div>'
+    });
+    $(document.body).append(initStr);
+</script>
+<script>
+    var $body = $(document.body);
+    var loading = false;
+    $(window).on('scroll',function() {
+        var offset = $body.outerHeight() - $body.scrollTop() - window.innerHeight;
+        console.log(offset);
+        if(offset < 50) {
+           load();
+        }
+    });
+    var load = function() {
+        var len,data,num;
+        len = serverData.length;
+      if(!loading) {
+          loading = true;
+         num = Math.floor(Math.random() * len );
+         data = serverData.slice(num,num + 10);
+         initStr = '';
+         data.map(function(elem) {
+             initStr += '<div><p>'+elem.nameString+'</p><p>'+elem.curDateTime+'</p></div>'
+         });
+          $(document.body).append(initStr);
+          loading = false;
+      }
+    };
+//    setTimeout(function() {
+//        var documentHeight = document.documentElement.offsetHeight;
+//        var viewportHeight = window.innerHeight;
+//        window.scrollTo(0,documentHeight - viewportHeight);
+//    },0)
+
+</script>
+<script>
+    var itemClick = function() {
+        $this = $(this);
+        var index = $this.index();
+        $this.addClass('active').siblings().removeClass('active');
+        $('.screen ul').eq(index).show().siblings('ul').hide();
+    };
+    var subItemClick = function () {
+        $(this).addClass('selected').siblings().removeClass('selected');
+    };
+    var resetClick = function() {
+        subItemClick.call($('.subTime li').eq(0));
+        subItemClick.call($('.subStatus li').eq(0));
+        itemClick.call($('.tap p').eq(0));
+    };
+    //点击筛选按钮显示筛选
+    $('.funnel').on('click', function () {
+        if(!$.myLoading) {
+            $('.mask').toggle();
+            $('.screen').toggle();
+            itemClick.call($('.tap p').eq(0));
+        }
+    });
+    //    subItemClick.call($('.subStatus li').eq(1));
+
+    //子选项，展示选中
+    $('.fakeSelect li').on('click', subItemClick);
+
+    //父选项
+    $('.tap p').on('click', itemClick);
+
+    //点击蒙版，隐藏筛选
+    $('.mask').on('click', function () {
+        $('.screen').hide();
+        $(this).hide();
+    });
+
+    //点击重置，选择不限
+    $('.reset').on('click', resetClick);
+
+    $('.confirm').on('click', function () {
+        $('.screen').hide();
+        $('.mask').hide();
+    });
+    $('.funnelBtn').on('click',function(){
+        $('.mask').toggle();
+        $('.screen').toggle();
+        itemClick.call($('.tap p').eq(0));
+    })
+</script>
+</body>
+</html>

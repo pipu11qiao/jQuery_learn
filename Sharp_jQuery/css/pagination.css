@@ -1,0 +1,60 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.pageBarBox{
+    display: inline-block;
+    margin:20px  auto;
+}
+.pageBarBox>div,.pageBarBox>ul{
+    float:left;
+    list-style: none;
+}
+.pageBarBox .pageBarLi{
+    list-style: none;
+    display: inline-block;
+}
+.pageBarBox a,.pageBarBox>div{
+    border: 1px solid #ddd;
+    text-decoration: none;
+    position: relative;
+    float: left;
+    padding: 3px 9px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    cursor: pointer;
+}
+.pageBarBox>div{
+    cursor: default;
+}
+.pageBarBox a:hover{
+    background-color: #eee;
+}
+
+.pageBarBox  .pageBarLi.active a{
+    color: #fff;
+    cursor: default;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+.pageBarBox  [class$='Page']{
+    font-style:normal;
+    color: #d44950;
+    margin: 0px 4px;
+    font-size: 16px;
+}
+.pageBarBox input{
+    display: block;
+    float: left;
+    width: 50px;
+    height: 28px;
+    font-size: 16px;
+    color: #337ab7;
+    outline: none;
+    border: 1px solid #ddd;
+    padding-left: 10px;
+    margin-left: 10px;
+    vertical-align: bottom;
+    -webkit-appearance: none;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Title</title>
+</head>vue
+<body>
+<div class="screen">
+    <div class="tap">
+        <p class="active"
+           data-value="time">
+            时间</p>
+        <p data-value="status">
+            状态</p>
+    </div>
+    <ul class="fakeSelect">
+        <li class="fakeOption selected"
+            data-value="all">
+            全部
+        </li>
+        <li class="fakeOption "
+            data-value="preMonth">
+            全部
+        </li>
+        <li class="fakeOption " data-value="curMonth">全部</li>
+    </ul>
+    <ul class="fakeSelect">
+        <li class="fakeOption " data-value="curMonth">全部</li>
+        <li class="fakeOption selected" data-value="finished">全部
+        </li>
+        <li class="fakeOption " data-value="unfinished">全部</li>
+    </ul>
+    <div class="btnBox">
+        <a class="reset">重置</a>
+        <a class="confirm">确定</a>
+    </div>
+</div>
+<script>
+    var Funnel = function() {
+        this.init();
+    }
+    Funnel.prototype = {
+        init: function() {
+            console.log(3);
+        }
+    };
+    var funnel = new Funnel();
+
+</script>
+</body>
+</html>

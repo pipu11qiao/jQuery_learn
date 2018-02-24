@@ -1,0 +1,29 @@
+.tab .sign{
+	padding-top: .51rem;
+	width: 75%;
+	height: 1.14rem;
+	line-height: .5rem;
+	margin: 0 auto;
+	border-bottom: 1px solid #ddd;
+}
+.tab .sign span.card{
+	float: left;
+	width: .32rem;
+	height: .25rem;
+	margin: .65rem .24rem 0 0;
+	background: url("../img/card.png") no-repeat;
+	background-size: cover;
+}
+.tab .sign span.Aa{
+	float: left;
+	width: .35rem;
+	height: .23rem;
+	margin: .43rem .24rem 0 0;
+	background: url("../img/Aa.png") no-repeat;
+	background-size: cover;
+}
+.sign input{
+	float: left;
+	margin-top: .57rem;
+	font-size: .26rem;
+}

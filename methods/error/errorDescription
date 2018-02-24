@@ -1,0 +1,2 @@
+Description: Bind an event handler to the "error" JavaScript event.
+This method is a shortcut for .on( "error", handler ).

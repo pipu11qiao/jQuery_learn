@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<ul>
+    <li><a class="btn" href="#">我的微博</a>
+    </li>
+    <li><a class="btn" href="#">我的博客</a>
+    </li>
+    <li>
+        <a href="#">我的小站</a>
+    </li>
+</ul>
+<p>这是p标签不是a标签，我不会受影响</p>
+<script src="../js/jquery-1.8.3.js"></script>
+<script src="../js/Beautifier.js"></script>
+<script>
+    $(".btn").myPlugin({
+        color: 'navy',
+        fontSize: '50px'
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+<div></div>
+<!--<script src="../js/jquery-1.8.3.js"></script>-->
+<script>
+    // jquery extend 浅复制实现
+//    $ = {
+//        extend: function(target,options) {
+//               for(var name in options) {
+////                   if(options.hasOwnProperty(name)){
+////                       console.log(name)
+////                       target[name] = options[name];
+////                   }
+//                   target[name] = options[name];
+//
+//               }
+//            return target;
+//        }
+//    }
+    // jquery extend 深复制实现
+
+    $ = {
+        extend: function(deep,target,options) {
+            for( name in options) {
+                copy = options[name];
+                if(deep && copy instanceof Array) {
+                    target[name] = $.extend(deep,[],copy);
+                } else if(deep && copy instanceof Object) {
+                    target[name] = $.extend(deep,{},copy);
+                } else{
+                    target[name] = copy;
+                }
+            }
+            return target;
+        }
+    }
+    var a = {
+        name: 'tom',
+        age: 25,
+        body: {
+            head: 23,
+            foot: 24
+        }
+    };
+    var b = {
+        color: 'blue',
+        price: 25,
+        part: {
+            leg: 20,
+            arm: 10
+        }
+    };
+    a = $.extend(true,a,b);
+    console.log(a);
+
+    b.part.arm = 25;
+    console.log(b.part.arm);
+    console.log(a.part.arm);
+
+
+</script>
+</body>
+</html>

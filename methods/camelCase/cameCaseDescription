@@ -1,0 +1,5 @@
+jQuery 用的是String.prototype.replace方法
+
+正则/-([a-z])/ig; 匹配-后的第一个字母用大写替代 好酷
+
+

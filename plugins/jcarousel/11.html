@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Title</title>
+    <style>
+        .abb{
+            width: 100px;
+            height: 100px;
+            background: #ddd;
+        }
+        .border_1px{
+            position: relative;
+        }
+        .border_1px:after {
+            position: absolute;
+            content: '';
+            display: block;
+            width: 100%;
+            height: 1px;
+            background: #ddd;
+            bottom: 1px;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="abb"></div>
+<script src="../../methods/jquery3.1.1.js"></script>
+<script ></script>
+<script>
+    // 注册一个jCarousel 的插件
+
+    (function ($,window,document,undefined) {
+        var private = 333;
+        $.jCarousel.plugin('test',{
+            name: 'aa',
+            _init: function () {
+                console.log(this.name);
+                console.log(private);
+                console.log('init')
+            }
+        });
+    })(jQuery,window,document)
+</script>
+<script>
+    console.log($.jCarousel);
+    console.log($.test);
+    $('.abb').test();
+
+
+</script>
+
+
+
+</body>
+</html>

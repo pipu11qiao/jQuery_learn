@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/2.1.css"/>
+    <script src="js/jquery-1.8.3.js"></script>
+    <script>
+        $(function(){
+            var ul=document.getElementById("ul1")
+           var $elem=$("ul li:eq(1)").remove();
+            $elem.appendTo(ul);
+            /*input placehoder样式*/
+            $("#address,#password").focus(function(){
+                $(this).val(this.value==this.defaultValue?"":this.value)
+            }).blur(function(){
+                $(this).val(this.value==""?this.defaultValue:this.value)
+            })
+        })
+    </script>
+</head>
+<body>
+<ul id="ul1">
+    <li title='苹果'>苹果</li>
+    <li title='橘子'>橘子</li>
+    <li title='菠萝'>菠萝</li>
+</ul>
+<input type="text" id="address" value="请输入邮箱地址"/>   <br/><br/>
+<input type="text" id="password" value="请输入邮箱密码"/>  <br/><br/>
+<input type="button" value="登录"/>
+
+</body>
+</html>

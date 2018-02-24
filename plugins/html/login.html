@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>登录</title>
+	<link rel="stylesheet" href="../css/style.css">
+	<script>
+		~function () {
+			var desW = 640;
+			var winW = document.documentElement.clientWidth;
+			document.documentElement.style.fontSize = winW / desW * 100 + 'px';
+		}();
+	</script>
+</head>
+<body style=" width:100%; background:url(img/bg.jpg) no-repeat top  center; background-size:100% auto; overflow:hidden;">
+<div>
+	<div class="language">
+		< a href="">English</ a>
+	< a href="" class="one active">中文繁體</ a>
+< a href="" class="one">中文简体</ a>
+</div>
+<div class="banner"></div>
+<div class="tab" id="tab">
+	<input type="text" value="金鵬卡號驗證" class=" btn on" readonly>
+	<input type="text" value="會員登錄驗證"class=" btn " readonly>
+	<div class="show content">
+		<div class="sign">
+			<span class="card"></span>
+			<input type="text" placeholder="金鵬會員卡號">
+			<i>忘記卡號</i>
+		</div>
+		<div class="sign name">
+			<span class="Aa"></span>
+			<input type="text" placeholder="您的姓氏">
+		</div>
+	</div>
+	<div class="content">
+		<div class="sign">
+			<span class="card"></span>
+			<input type="text" placeholder="身份证号/手机号/邮箱/护照">
+		</div>
+		<div class="sign password">
+			<span class="Aa"></span>
+			<input type="text" placeholder="密码">
+			<i>忘记密码</i>
+		</div>
+	
+	</div>
+</div>
+</div>
+
+<script src="../js/jquery-1.8.3.js"></script>
+<!--<script src="js/login.js"></script>-->
+</body>
+</html>

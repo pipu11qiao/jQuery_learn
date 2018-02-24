@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Title</title>
+    <style>
+        div{
+            width: 200px;
+            height: 100px;
+            background-color: #2B93D2;
+        }
+        p{
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+<!--<div><p>This is a child</p></div>-->
+<script src="../js/jquery3.1.1.js"></script>
+<script>
+    $(document.body).append('<div><p>This is a child</p></div>');
+    var div = $('div');
+    console.log(div);
+    div.on('click',$('p'),function(e) {
+        e.stopPropagation();
+        console.log(this.innerHTML);
+    });
+
+//    var div = $(document.body).append('<div><p>This is a child</p></div>');
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+<h3>页面3 </h3>
+<button id="backBtn">回退</button>
+<a href="test2.html"></a>
+<script src="Ch1/js/jquery-1.8.3.js"></script>
+<script>
+    var planDate = '11/15/2016 00:00:00';
+    planDate = planDate.replace(/(\d{2}:\d{2}:\d{2})/g,function() {
+        return '23:59:59';
+    });
+    console.log(planDate)
+</script>
+
+<script>
+
+
+    <script type="text/javascript">
+
+    var __baseURL = "${baseURL}";
+
+
+
+    $('.infinite-scroll-preloader').show();
+    $.ajax({
+        url:__baseURL+'/crm/office/getApproveList.do',
+        data:{},
+        type:"post",
+        success:function(data){
+            $('.infinite-scroll-preloader').hide();
+            data = JSON.parse(data);
+            if(data['code'] === 'success'){
+                if(data.info == ''){
+                    $('.infinite-scroll-preloader').html("<p>无更多数据</p>").show();
+                }
+                var html ='';
+                var url,statusClass,statusStr;
+                $.each(data.info,function(i,v){
+                    var createTime = new Date(v.createTime).Format('yyyy.MM.dd');
+                    if(v.type == '请假'){
+                        url = __baseURL + '/crm/office/leave/signDetail.do?rowId=' + v.rowId + '&status=' + v.status;
+                    }else if(v.type == '报销'){
+                        url = __baseURL + '/crm/office/reimbursement/signDetail.do?rowId=' + v.rowId + '&status=' + v.status;
+                    }else if(v.type == '通用审批'){
+                        url = __baseURL + '/crm/office/generalApproval/signDetail.do?rowId=' + v.rowId + '&status=' + v.status;
+                    }else{
+                        url = __baseURL + '/crm/office/evection/signDetail.do?rowId=' + v.rowId + '&status=' + v.status;
+                    }
+                    if(v.status == '新建'){
+                        statusClass = 'new';
+                        statusStr = 'edit';
+                    }else if(v.status == '待审批'){
+                        statusClass = 'submit';
+                        statusStr = 'edit';
+                    }else if(v.status == '驳回'){
+                        statusClass = 'audit';
+                        statusStr = 'refuse';
+                    }else{
+                        statusClass = 'agree';
+                        statusStr = 'agree'
+                    }
+                    html += '<li>\
+                                <a href="'+ url +'" class="reviewItem clearfix"  data-status="' + statusStr +'" data-rowId="' + v.rowId +'">\
+                                <img class="fl" src="${baseURL}/crm/headicon.do?loginName='+ v.loginName +'" />\
+                                <div class=" reviewInfo fl">\
+                                    <h5>'+ v.createrName +' 提交了 '+ v.type +' 的审批</h5><span class="'+ statusClass +'">'+ v.status +'</span>\
+                                    <p>提交日期：'+ createTime +'</p>\
+                                </div>\
+                                </a>\
+                            </li>'
+                })
+                $(".reviewList").append(html);
+                $('.reviewList a').on('click',function() {
+                    localStorage.office_formStatus = $(this).data('status');
+                    localStorage.office_formRowId = $(this).data('rowid');
+                })
+            }else{
+                Zepto.toast(data['info']);
+            }
+        },
+        error:function(){
+            $('.infinite-scroll-preloader').hide();
+            console.log("链接超时");}
+    });
+</script>
+</script>
+
+</body>
+</html>

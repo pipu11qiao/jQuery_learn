@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button id="btn1">lala</button>
+<script src="../jquery3.1.1.js"></script>
+<script>
+    var arr = [1,2,3,4,5];
+    arr.version = 4;
+    console.log(arr);
+    var arr1 = $.map(arr,function(elem,index) {
+        return elem + '' + index;
+    });
+    console.log(arr);
+    console.log(arr1);
+    $('#btn1').on('click.monthPicker',function() {
+        console.log('monthPicker')
+    });
+    $('#btn1').on('click',function() {
+        console.log(Object.keys(arguments.callee))
+        console.log('click')
+    });
+    $('#btn1').off('click.monthPicker')
+
+</script>
+</body>
+</html>

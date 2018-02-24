@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../collapse/collapse.css"/>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        .outer{
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            max-height: 500px;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .oneItem{
+            width: 100%;
+        }
+        .oneItem>.title{
+            height: 30px;
+            line-height: 30px;
+            background: #eee;
+            border-bottom:1px solid #ddd;
+        }
+        .imgWindow {
+            width: 100%;
+        }
+        .imgWindow:after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+        .imgItem {
+            float: left;
+            width: 33.33%;
+            height: 50px;
+            background-color: #dcdda7;
+        }
+
+
+    </style>
+</head>
+<body>
+    <ul class="outer">
+        <li class="oneItem">
+            <p class="title">类型一</p>
+            <ul class="imgWindow collapse">
+                <li class="imgItem">sdfsadf</li>
+                <li class="imgItem">jsdflajsfl</li>
+                <li class="imgItem">sadf</li>
+                <li class="imgItem">sadfsadf</li>
+                <li class="imgItem">sadfsdaf</li>
+            </ul>
+        </li>
+        <li class="oneItem">
+            <p class="title">类型二</p>
+            <ul class="imgWindow collapse">
+                <li class="imgItem">sdfsadf</li>
+                <li class="imgItem">jsdflajsfl</li>
+                <li class="imgItem">sadf</li>
+                <li class="imgItem">sadfsadf</li>
+                <li class="imgItem">sadfsdaf</li>
+            </ul>
+        </li>
+        <li class="oneItem">
+            <p class="title">类型三</p>
+            <ul class="imgWindow collapse">
+                <li class="imgItem">sdfsadf</li>
+                <li class="imgItem">jsdflajsfl</li>
+                <li class="imgItem">sadf</li>
+                <li class="imgItem">sadfsadf</li>
+                <li class="imgItem">sadfsdaf</li>
+            </ul>
+        </li>
+        <li class="oneItem">
+            <p class="title">类型三</p>
+            <ul class="imgWindow collapse">
+                <li class="imgItem">sdfsadf</li>
+                <li class="imgItem">jsdflajsfl</li>
+                <li class="imgItem">sadf</li>
+                <li class="imgItem">sadfsadf</li>
+                <li class="imgItem">sadfsdaf</li>
+            </ul>
+        </li>
+        <li class="oneItem">
+            <p class="title">类型三</p>
+            <ul class="imgWindow collapse">
+                <li class="imgItem">sdfsadf</li>
+                <li class="imgItem">jsdflajsfl</li>
+                <li class="imgItem">sadf</li>
+                <li class="imgItem">sadfsadf</li>
+                <li class="imgItem">sadfsdaf</li>
+            </ul>
+        </li>
+
+    </ul>
+
+    <script src="../js/jquery3.1.1.js"></script>
+    <script src="../collapse/collapse.js"></script>
+    <script>
+
+    </script>
+    <script>
+        $('.collapse').collapse();
+        $('.title').on('click',function () {
+          var $this = $(this);
+          if(!$this.next().hasClass('in')) {
+            $('.collapse.in').collapse('hide');
+          }
+          $(this).next().collapse('toggle');
+        })
+    </script>
+
+</body>
+</html>
